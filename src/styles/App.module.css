@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+@media (max-width: 1000px) {
+    .main {
+        padding: 6rem 3rem;
+    }
+}
+@media (max-width: 580px) {
+    .main {
+        padding: 6rem 1rem;
+    }
+}
+
+.container {
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    font-size: 0.85rem;
+    max-width: var(--max-width);
+    width: 100%;
+    z-index: 2;
+    font-family: var(--font-mono);
+}

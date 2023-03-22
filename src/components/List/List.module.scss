@@ -1,0 +1,13 @@
+.table {
+  thead{
+  }
+  tfoot tr{
+    border: none;
+    background-color: transparent;
+    td {
+      border: none;
+      background-color: transparent;
+    }
+  }
+}
+
