@@ -1,0 +1,14 @@
+.wrapper {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2rem;
+}
+.wrapper .main_details {
+  line-height: 2;
+}
+.wrapper li {
+  list-style: none;
+  line-height: 2.5;
+}
+
+/*# sourceMappingURL=Details.module.css.map */

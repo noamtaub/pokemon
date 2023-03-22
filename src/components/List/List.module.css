@@ -1,0 +1,10 @@
+.table tfoot tr {
+  border: none;
+  background-color: transparent;
+}
+.table tfoot tr td {
+  border: none;
+  background-color: transparent;
+}
+
+/*# sourceMappingURL=List.module.css.map */
