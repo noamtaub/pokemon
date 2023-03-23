@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { Details } from '@/components/Details/Details';
+import React, { useEffect, useState } from 'react';
 
-function PokemonDetails({pokemon}) {
-
+function PokemonDetails() {
   return (
     <Details/>
   );

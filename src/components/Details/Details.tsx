@@ -11,7 +11,7 @@ export const Details = () => {
   const [data, setData] = useState([])
 
   const fetchPokemonDetails = async (id:number) => {
-    const data =  await fetch(`/api/pokemon/${id}`);
+    const data =  await fetch(`http://localhost/pokemon/${id}`);
     setData(await data.json())
   };
 
@@ -19,11 +19,11 @@ export const Details = () => {
     fetchPokemonDetails(id)
   },[id])
   console.log(data);
-  return (
+  return data?.length > 0 ?(
     <div>
-      <h1>Edit Pokémon</h1>
+      <h1>View Pokémon</h1>
       <div className={Styles.wrapper}>
-        <Image src={`/images/${completeZeros(id)}.png`} alt={"Pokémon Image"} width={100} height={100}/>
+        <img src={`http://localhost/images/${completeZeros(id)}.png`} alt={"Pokémon Image"} width={100} height={100}/>
 
         {
           data.map((value, index) => {
@@ -42,5 +42,5 @@ export const Details = () => {
       </div>
       <a href={'/'} className={'btn btn-primary'}>Go back</a>
     </div>
-  );
+  ):<h1>Pokémon not found</h1>
 }
