@@ -1,3 +1,3 @@
 export const completeZeros = (id) => {
-  return id.padStart(3, '0');
+  return id.toString().padStart(3, '0');
 }

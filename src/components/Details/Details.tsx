@@ -7,40 +7,42 @@ import Styles from './Details.module.css';
 export const Details = () => {
   const router = useRouter();
   const {id} = router.query;
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
   const fetchPokemonDetails = async (id) => {
     const data = await fetch(`http://localhost/pokemon/${id}`);
-    setData(await data.json());
+    const dataJson = await data.json();
+    if(!dataJson.message){
+      setData(dataJson);
+    }
   };
 
   useEffect(() => {
-    fetchPokemonDetails(id).catch(console.log);
+    if(id){
+      fetchPokemonDetails(id).catch(console.log);
+    }
   }, [id]);
-
   return id ? (
       <div>
         <h1>View Pokémon</h1>
-        {data?.length === 0 && <h2>Pokémon Not found</h2>}
+        {data?.message ? <h2>Pokémon Not found</h2>
+        : data.id ?
         <div className={Styles.wrapper}>
           <img src={`http://localhost/images/${completeZeros(id)}.png`} alt={"Pokémon Image"} width={100} height={100}/>
-          {
-            data.map((value, index) => {
-              return <div key={index}>
-                <h3 className={Styles.main_detail}>Name: {value.name.english}</h3>
-                <h3 className={Styles.main_detail}>Type: {value.type.join(', ', ',')}</h3>
+            <div>
+                <h3 className={Styles.main_detail}>Name: {data.name.english}</h3>
+                <h3 className={Styles.main_detail}>Type: {data.type.join(', ', ',')}</h3>
                 <h3 className={Styles.main_detail}>Base:</h3>
                 <ul>
-                  {Object.entries(value.base).map(([stat, statValue]) => {
-                    return <li key={value.id}>{stat}: {statValue}</li>
+                  {Object.entries(data.base).map(([stat, statValue], statId) => {
+                    return <li key={statId}>{stat}: {statValue}</li>
                   })}
                 </ul>
               </div>
-            })
-          }
         </div>
+        : <></>
+        }
         <a href={'/'} className={'btn btn-primary'}>Go back</a>
       </div>
-    ) :
-    <></>;
+    ) : <></>;
 };
