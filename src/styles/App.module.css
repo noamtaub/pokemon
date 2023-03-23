@@ -3,18 +3,18 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 6rem;
+    padding: 3rem 6rem;
     min-height: 100vh;
 }
 
 @media (max-width: 1000px) {
     .main {
-        padding: 6rem 3rem;
+        padding: 3rem;
     }
 }
 @media (max-width: 580px) {
     .main {
-        padding: 6rem 1rem;
+        padding: 3rem 1rem;
     }
 }
 

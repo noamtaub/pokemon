@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Table } from 'react-bootstrap';
 
 import Styles from './List.module.css'
-import { completeZeros } from '@/servieces/servieces';
+import { completeZeros } from '@/services/services';
 
 export const List = (props) => {
   const [data, setData] = useState([])
