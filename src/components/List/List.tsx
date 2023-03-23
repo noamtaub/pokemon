@@ -11,13 +11,17 @@ export const List = (props) => {
 
 
   const fetchPokemonData = async () => {
-    const data = fetch('api/pokemon');
+    const data = fetch('http://localhost/pokemon');
+    // const data = fetch('/api/pokemon/');
     data.then(res => res.json())
       .then(data => setData(data))
       .catch(error => console.log(error));
   };
   useEffect(() => {
-    fetchPokemonData();
+    console.log(data);
+    if(data.length === 0){
+      fetchPokemonData(); 
+    }
   }, [])
 
   return (
@@ -30,10 +34,12 @@ export const List = (props) => {
       </thead>
       <tbody>
       {
-        data?.map((value, index) => {
-          return <tr key={index} onClick={() => console.log("sfd")}>
+        data && data?.map((value, index) => {
+          console.log(value, index)
+          return <tr key={index}>
             <td className={'text-center'}>
-              <Image src={`/images/${completeZeros(value.id)}.png`} alt={"Pokémon Image"} width={100} height={100}/>
+              {/* <Image src={`/images/${completeZeros(value.id)}.png`} alt={"Pokémon Image"} width={80} height={80}/> */}
+              <img src={`http://localhost/images/${completeZeros(value.id)}.png`} alt={"Pokémon Image"} width={80} height={80}/>
             </td>
             <td valign={'middle'}>
               <Link href={`/details/${value.id}`}><h3>{value.name.english}</h3></Link>
