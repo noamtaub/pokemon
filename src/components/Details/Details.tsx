@@ -12,9 +12,7 @@ export const Details = () => {
   const fetchPokemonDetails = async (id) => {
     const data = await fetch(`http://localhost/pokemon/${id}`);
     const dataJson = await data.json();
-    if(!dataJson.message){
-      setData(dataJson);
-    }
+    setData(dataJson);
   };
 
   useEffect(() => {
@@ -31,14 +29,14 @@ export const Details = () => {
           <img src={`http://localhost/images/${completeZeros(id)}.png`} alt={"Pokémon Image"} width={100} height={100}/>
             <div>
                 <h3 className={Styles.main_detail}>Name: {data.name.english}</h3>
-                <h3 className={Styles.main_detail}>Type: {data.type.join(', ', ',')}</h3>
-                <h3 className={Styles.main_detail}>Base:</h3>
-                <ul>
-                  {Object.entries(data.base).map(([stat, statValue], statId) => {
-                    return <li key={statId}>{stat}: {statValue}</li>
-                  })}
-                </ul>
-              </div>
+              <h3 className={Styles.main_detail}>Type: {data.type.join(', ', ',')}</h3>
+              <h3 className={Styles.main_detail}>Base:</h3>
+              <ul>
+                {Object.entries(data.base).map(([stat, statValue], statId) => {
+                  return <li key={statId}>{stat}: {statValue}</li>
+                })}
+              </ul>
+            </div>
         </div>
         : <></>
         }
