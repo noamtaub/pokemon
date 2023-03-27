@@ -8,7 +8,7 @@ export const Details = () => {
   const router = useRouter();
   const {id} = router.query;
   const [data, setData] = useState({});
-
+  
   const fetchPokemonDetails = async (id) => {
     const data = await fetch(`http://localhost/pokemon/${id}`);
     const dataJson = await data.json();

@@ -1,26 +1,32 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Table } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 
 import Styles from './List.module.css'
 import { completeZeros } from '@/services/services';
+import { useRouter } from 'next/router';
 
 export const List = (props) => {
   const [data, setData] = useState([])
-
+  const router = useRouter()
 
   const fetchPokemonData = async () => {
-    const data = fetch('http://localhost/pokemon');
-    // const data = fetch('/api/pokemon/');
+    const data = fetch('http://localhost/pokemon',{credentials:"include"});
     data.then(res => res.json())
-      .then(data => setData(data))
+      .then(data => {
+        Cookies.set('pokemonData', JSON.stringify(data))
+        setData(data)
+      })
       .catch(error => console.log(error));
   };
   useEffect(() => {
-    console.log(data);
-    if(data.length === 0){
-      fetchPokemonData(); 
+    const cookieData = Cookies.get('pokemonData');
+    if(document.referrer && cookieData){
+      setData(JSON.parse(cookieData))
+      return
     }
+    fetchPokemonData(); 
   }, [])
 
   return (
@@ -34,10 +40,8 @@ export const List = (props) => {
       <tbody>
       {
         data && data?.map((value, index) => {
-          console.log(value, index)
           return <tr key={index}>
             <td className={'text-center'}>
-              {/* <Image src={`/images/${completeZeros(value.id)}.png`} alt={"Pokémon Image"} width={80} height={80}/> */}
               <img src={`http://localhost/images/${completeZeros(value.id)}.png`} alt={"Pokémon Image"} width={80} height={80}/>
             </td>
             <td valign={'middle'}>
